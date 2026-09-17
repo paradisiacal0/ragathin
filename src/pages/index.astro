@@ -9,14 +9,14 @@
   <link rel="icon" type="image/png" href="/images/background.png" />
   <style>
     @font-face {
-      font-family: 'Vipna';
+      font-family: 'VipnaBold';
       src: url('/fonts/Vipnagorgialla-Bold.otf') format('opentype');
-      font-weight: bold;
+      font-weight: normal;
       font-style: normal;
     }
 
     @font-face {
-      font-family: 'Vipna';
+      font-family: 'VipnaRg';
       src: url('/fonts/VipnagorgillaRg.otf') format('opentype');
       font-weight: normal;
       font-style: normal;
@@ -71,7 +71,7 @@
     }
 
     #logo-pronunciation {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-weight: normal;
       font-size: 11px;
       letter-spacing: normal;
@@ -88,12 +88,22 @@
     }
 
     #logo-tagline {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-weight: normal;
       font-size: 13px;
       letter-spacing: normal;
       color: #111;
       text-transform: none;
+    }
+
+    #logo-subtagline {
+      font-family: 'VipnaRg', monospace;
+      font-weight: normal;
+      font-size: 11px;
+      letter-spacing: normal;
+      color: #111;
+      opacity: 0.5;
+      font-style: italic;
     }
 
     /* ── THREE COLUMN LAYOUT ── */
@@ -196,7 +206,7 @@
     }
 
     .seller-line-name {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaBold', monospace;
       font-size: 52px;
       line-height: 0.88;
       letter-spacing: -0.01em;
@@ -209,7 +219,7 @@
     }
 
     .make-offer-btn {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-size: 11px;
       letter-spacing: 0.28em;
       color: #111;
@@ -335,7 +345,7 @@
     }
 
     #offer-header {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaBold', monospace;
       font-size: 72px;
       line-height: 0.85;
       letter-spacing: -0.02em;
@@ -349,7 +359,7 @@
     }
 
     #offer-seller-name {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-size: 11px;
       letter-spacing: 0.3em;
       color: rgba(255,255,255,0.2);
@@ -381,7 +391,7 @@
     }
 
     #offer-label {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-size: 9px;
       letter-spacing: 0.5em;
       color: rgba(255,255,255,0.18);
@@ -410,7 +420,7 @@
       background: transparent;
       border: none;
       outline: none;
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-size: 22px;
       letter-spacing: 0.08em;
       color: #fff;
@@ -450,8 +460,19 @@
       font-weight: normal;
     }
 
+    #dialogue-intro {
+      font-family: 'VipnaRg', monospace;
+      font-weight: normal;
+      font-size: 16px;
+      letter-spacing: normal;
+      color: #111;
+      opacity: 0.5;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
     .dialogue-title {
-      font-family: 'VipnagorgillaRg', 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-weight: normal;
       font-size: 18px;
       letter-spacing: 0.1em;
@@ -475,6 +496,20 @@
       font-weight: normal;
     }
 
+    #dialogue-3 {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      width: 480px;
+      max-width: 88vw;
+      margin: 80px auto 60px;
+      padding: 0 16px;
+      font-weight: normal;
+    }
+
     #bottom-img {
       display: block;
       max-width: 160px;
@@ -484,7 +519,7 @@
     }
 
     .dialogue-line {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-weight: normal;
       font-size: 16px;
       letter-spacing: normal;
@@ -509,8 +544,21 @@
       margin-right: 4px;
     }
 
+    #copyright {
+      font-family: 'VipnaRg', monospace;
+      font-weight: normal;
+      font-size: 10px;
+      letter-spacing: normal;
+      color: #111;
+      opacity: 0.35;
+      text-align: center;
+      margin: 24px auto 48px;
+      position: relative;
+      z-index: 6;
+    }
+
     .dialogue-action {
-      font-family: 'Vipna', monospace;
+      font-family: 'VipnaRg', monospace;
       font-weight: normal;
       font-size: 13px;
       letter-spacing: normal;
@@ -544,6 +592,7 @@
     <span id="logo-pronunciation">/ræɡʌθɪn/ [noun, verb]</span>
     <img id="center-logo" src="/images/ragathinkithorizontalblank.png" alt="" onerror="this.style.display='none'" />
     <span id="logo-tagline">ragathinning kit</span>
+    <span id="logo-subtagline">(tactical goods)</span>
 
   </div>
 
@@ -565,6 +614,7 @@
 
   <!-- DIALOGUE -->
   <div id="dialogue">
+    <div id="dialogue-intro">start</div>
     <div class="dialogue-title">preface</div>
     <div class="dialogue-line"><span class="speaker">SLYV</span><span class="direction">(whispering to Neue)</span> What was that word? That your friend used?</div>
     <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(intrigued)</span> Which word?</div>
@@ -616,7 +666,99 @@
     <div class="dialogue-line"><span class="speaker">IVY</span><span class="direction">(O.S.)</span> Or so said the government-issued campaign.</div>
   </div>
 
+  <!-- DIALOGUE 3 -->
+  <div id="dialogue-3">
+    <div class="dialogue-title">paradise</div>
+    <div class="dialogue-action">P and Bea are lying backwards on top of bean bag cushions on the ground looking up at the sky in silence.</div>
+    <div class="dialogue-action">P and Bea are kicking their feet and fidgeting as they look up at the sky.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>What time you say is it?</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>ummm depending</div>
+    <div class="dialogue-action">Bea points up at the sky.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Is that sun or the moon</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Not clear</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>blurry</div>
+    <div class="dialogue-action">P squints and shrugs and sighs out of uncertainty.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>So either he is late or he will be early</div>
+    <div class="dialogue-action">P and Bea kick around a bit more.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Late, he's definitely late otherwise we wouldn't be waiting here and we would have been here later</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Unless we were early</div>
+    <div class="dialogue-action">P and Bea kick around a bit more.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>How are we supposed to explain it</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Explain what</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>The different steps</div>
+    <div class="dialogue-action">Bea holds up 2 fingers and squints at them, looking at the light shining between the two fingers from the sky.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Because we can tell him the sexual way or the uh</div>
+    <div class="dialogue-action">Bea thinks. P fills the silence.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Thaaa</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span><span class="direction">(forgot the right word)</span> Insexual, nonsexual way</div>
+    <div class="dialogue-line"><span class="speaker">P</span>There's nothing sexual even about it</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>That's why it is the insexual way</div>
+    <div class="dialogue-line"><span class="speaker">P</span>No I mean the sexual way</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span><span class="direction">(nodding head)</span> Ohhh</div>
+    <div class="dialogue-action">Bea doesn't respond. Still kicking feet.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Well in the sexual way you have to kiss the person and that feels at least a little sexual</div>
+    <div class="dialogue-action">Bea holds up a little with their fingers, squinting again at it.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Yeah but that's as far as it goes</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Maybe it is easier to explain the ab-sexual way because then it is one less step because you don't have to use the paste to protect your mouth</div>
+    <div class="dialogue-line"><span class="speaker">P</span>But usually people like the other way</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Yeah because it's sexual</div>
+    <div class="dialogue-action">P sees what Bea means now.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>I think what I'm getting at is-</div>
+    <div class="dialogue-action">Interrupted by a voice.</div>
+    <div class="dialogue-line"><span class="speaker">JUDE</span>Hi,</div>
+    <div class="dialogue-action">Bea and P roll off their bean bags and onto the floor.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>You're right on time</div>
+    <div class="dialogue-action">Bea squints and puts out one hand for each question.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Would you rather kiss them before you shrink them or would you rather find another way like a no-contact</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Because if you kiss them that's sexual</div>
+    <div class="dialogue-line"><span class="speaker">P</span><span class="direction">(to Jude)</span> I don't think so</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span><span class="direction">(to Jude)</span> I do, do you?</div>
+    <div class="dialogue-action">Jude shrugs and sits.</div>
+    <div class="dialogue-line"><span class="speaker">JUDE</span>I'll just do whatever the two of you tell me to.</div>
+    <div class="dialogue-action">Bea takes out three bags and places them on the ground. Bea points at each as P explains.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>So there are three steps...</div>
+    <div class="dialogue-line"><span class="speaker">P</span>You coat your mouth. all inside</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>You can't miss even a dot</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Then, spread this in your mouth and your lips. From there you have five minutes to kiss, rinse and spit.</div>
+    <div class="dialogue-action">Bea holds up 5 on her hand.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>5 minutes. 5 minutes</div>
+    <div class="dialogue-action">P points at the last bag.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Put this on their tongue and pick them up once they shrink.</div>
+    <div class="dialogue-action">Bea holds up one finger.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Most important thing... light. Be prepared with your container or your bag. You have to put them in light right away</div>
+    <div class="dialogue-line"><span class="speaker">JUDE</span>Otherwise what</div>
+    <div class="dialogue-action">P fake falls back dead. Bea falls backward as well. Both with their tongues out like they are dead. Jude waits for something to happen but nothing does.</div>
+    <div class="dialogue-action">Jude puts the money on the floor and takes the bags. He scurries off.</div>
+    <div class="dialogue-action">Still in the same 'dead' position with her tongue out, P opens one of her eyes and looks at Bea.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Psst</div>
+    <div class="dialogue-action">Bea, also in the same position with her tongue out, opens one of her eyes.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Pssst</div>
+    <div class="dialogue-action">We go back and forth, their tongues stay in their mouths in between so they can talk.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Do you know who came by yesterday</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>No</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Ash</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Aw I missed</div>
+    <div class="dialogue-line"><span class="speaker">P</span>I know</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>His hair is awesome</div>
+    <div class="dialogue-line"><span class="speaker">P</span>I know</div>
+    <div class="dialogue-action">One moment, both Bea and P have their one eye open but their tongues are in their mouths. Their eyes are surveying around the sky.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>I still can't tell the time</div>
+    <div class="dialogue-action">P brings her eye back to Bea.</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Do you know what he told me?</div>
+    <div class="dialogue-action">Bea brings her eye back to P.</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>No</div>
+    <div class="dialogue-line"><span class="speaker">P</span>He said that it feels like dying apparently, after the third step</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>How would Ash know?</div>
+    <div class="dialogue-line"><span class="speaker">P</span>He said that his guy told him</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Who is his guy</div>
+    <div class="dialogue-line"><span class="speaker">P</span>I don't know</div>
+    <div class="dialogue-line"><span class="speaker">BEA</span>Well what does dying feel like</div>
+    <div class="dialogue-line"><span class="speaker">P</span>Like you're in paradise.</div>
+    <div class="dialogue-action">Bea and P stay for a moment. They close their eyes and stick their tongues back out.</div>
+  </div>
+
   <img id="bottom-img" src="/images/g.png" alt="" onerror="this.style.display='none'" />
+  <p id="copyright">© paradisiacal 2026</p>
 
   <!-- OFFER OVERLAY -->
   <div id="offer-overlay">
