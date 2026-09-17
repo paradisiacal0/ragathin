@@ -5,7 +5,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sokni</title>
+  <title>ragathin</title>
+  <link rel="icon" type="image/png" href="/images/background.png" />
   <style>
     @font-face {
       font-family: 'Vipna';
@@ -449,6 +450,31 @@
       font-weight: normal;
     }
 
+    .dialogue-title {
+      font-family: 'VipnagorgillaRg', 'Vipna', monospace;
+      font-weight: normal;
+      font-size: 18px;
+      letter-spacing: 0.1em;
+      color: #111;
+      opacity: 1;
+      text-transform: lowercase;
+      margin-bottom: 8px;
+    }
+
+    #dialogue-2 {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      width: 480px;
+      max-width: 88vw;
+      margin: 80px auto 60px;
+      padding: 0 16px;
+      font-weight: normal;
+    }
+
     #bottom-img {
       display: block;
       max-width: 160px;
@@ -539,6 +565,7 @@
 
   <!-- DIALOGUE -->
   <div id="dialogue">
+    <div class="dialogue-title">preface</div>
     <div class="dialogue-line"><span class="speaker">SLYV</span><span class="direction">(whispering to Neue)</span> What was that word? That your friend used?</div>
     <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(intrigued)</span> Which word?</div>
     <div class="dialogue-line"><span class="speaker">SLYV</span><span class="direction">(almost intoxicated)</span> It sounded so pretty. It was drifty and so, so... --? Rag</div>
@@ -570,6 +597,23 @@
     <div class="dialogue-action">WE SEE the human face of the young woman grow, slowly, back to being inhuman as she searches again for the digitized glass.</div>
     <div class="dialogue-line"><span class="speaker">SLYV</span><span class="direction">(O.S.)</span> What could be better than this for them?</div>
     <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(O.S.)</span> That's for someone like you to decide,</div>
+  </div>
+
+  <!-- DIALOGUE 2 -->
+  <div id="dialogue-2">
+    <div class="dialogue-title">prophet</div>
+    <div class="dialogue-line"><span class="speaker">IVY</span>I heard that it feels like almost ascending sort of, when you are stolen.</div>
+    <div class="dialogue-line"><span class="speaker">RAY</span>How?</div>
+    <div class="dialogue-line"><span class="speaker">IVY</span>They were playing a public service announcement as I walked through the bus station.</div>
+    <div class="dialogue-line"><span class="speaker">RAY</span><span class="direction">(as in, 'go on')</span> Mmhm...</div>
+    <div class="dialogue-line"><span class="speaker">IVY</span>the drug they use to make you small is like a distortion</div>
+    <div class="dialogue-line"><span class="speaker">RAY</span>like the brain or the body?</div>
+    <div class="dialogue-action">Ivy nods. Ray squints and scrunches his forehead, confused, he looks away as Ivy continues.</div>
+    <div class="dialogue-line"><span class="speaker">IVY</span>You don't know what you're looking at or what you're feeling. but you are aware that you were chosen.</div>
+    <div class="dialogue-line"><span class="speaker">RAY</span><span class="direction">(getting it)</span> Because you were.</div>
+    <div class="dialogue-line"><span class="speaker">IVY</span>like everyone else who is alive is actually dead, and you've made it through the apocalypse into something else.</div>
+    <div class="dialogue-action">Ray looks at the statue of the religious figure in the shop.</div>
+    <div class="dialogue-line"><span class="speaker">IVY</span><span class="direction">(O.S.)</span> Or so said the government-issued campaign.</div>
   </div>
 
   <img id="bottom-img" src="/images/g.png" alt="" onerror="this.style.display='none'" />
