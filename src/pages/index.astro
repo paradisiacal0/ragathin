@@ -16,7 +16,7 @@
 
     @font-face {
       font-family: 'Vipna';
-      src: url('/fonts/Vipnagorgialla Rg.otf') format('opentype');
+      src: url('/fonts/VipnagorgillaRg.otf') format('opentype');
       font-weight: normal;
       font-style: normal;
     }
@@ -447,22 +447,12 @@
       padding: 0 16px;
     }
 
-    #bottom-img-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0;
-      position: relative;
-      z-index: 6;
-    }
-
-    #bottom-img, #bottom-img-2 {
+    #bottom-img {
       display: block;
       max-width: 160px;
-    }
-
-    #bottom-img-2 {
-      mix-blend-mode: difference;
+      margin: 0 auto;
+      position: relative;
+      z-index: 6;
     }
 
     .dialogue-line {
@@ -580,10 +570,7 @@
     <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(O.S.)</span> That's for someone like you to decide,</div>
   </div>
 
-  <div id="bottom-img-wrap">
-    <img id="bottom-img" src="/images/g.png" alt="" onerror="this.style.display='none'" />
-    <img id="bottom-img-2" src="/images/g.png" alt="" onerror="this.style.display='none'" />
-  </div>
+  <img id="bottom-img" src="/images/g.png" alt="" onerror="this.style.display='none'" />
 
   <!-- OFFER OVERLAY -->
   <div id="offer-overlay">
