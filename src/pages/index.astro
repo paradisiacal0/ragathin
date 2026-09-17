@@ -1,17 +1,632 @@
 ---
-
 ---
-
+<!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>sokni</title>
+  <style>
+    @font-face {
+      font-family: 'Vipna';
+      src: url('/fonts/Vipnagorgialla-Bold.otf') format('opentype');
+      font-weight: bold;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Vipna';
+      src: url('/fonts/Vipnagorgialla Rg.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: #ede8e1;
+      overflow-x: hidden;
+    }
+
+    #bg-img {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    #glow {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 90% 50% at 50% 54%, rgba(255,60,100,0.09) 0%, transparent 100%),
+        radial-gradient(ellipse 60% 26% at 50% 54%, rgba(255,18,68,0.28) 0%, rgba(255,50,95,0.10) 60%, transparent 100%),
+        radial-gradient(ellipse 38% 10% at 50% 54%, rgba(255,0,52,0.88) 0%, rgba(255,15,65,0.70) 28%, rgba(245,10,60,0.38) 60%, transparent 100%);
+      filter: blur(28px);
+    }
+
+    #logo-block {
+      position: fixed;
+      top: 44px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #logo-pronunciation {
+      font-family: 'Vipna', monospace;
+      font-weight: normal;
+      font-size: 11px;
+      letter-spacing: normal;
+      color: #111;
+      opacity: 0.45;
+      margin-bottom: 4px;
+    }
+
+    #center-logo {
+      max-width: 70vw;
+      max-height: 30vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    #logo-tagline {
+      font-family: 'Vipna', monospace;
+      font-weight: normal;
+      font-size: 13px;
+      letter-spacing: normal;
+      color: #111;
+      text-transform: none;
+    }
+
+    /* ── THREE COLUMN LAYOUT ── */
+    #columns {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .col {
+      flex: 1;
+      height: 100%;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 0 0 28px;
+    }
+
+
+    /* ── SMALL CARD ── */
+    .seller-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 16px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .seller-img-wrap {
+      width: 110px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .worn-img {
+      object-fit: cover;
+      display: block;
+      filter: url(#worn) contrast(1.6) brightness(0.88) saturate(0.15) sepia(0.3);
+      animation: img-drift 9s ease-in-out infinite;
+    }
+
+    @keyframes img-drift {
+      0%   { filter: url(#worn) contrast(1.6)  brightness(0.88) saturate(0.15) sepia(0.3); }
+      30%  { filter: url(#worn) contrast(1.75) brightness(0.82) saturate(0.08) sepia(0.45); }
+      55%  { filter: url(#worn) contrast(1.55) brightness(0.92) saturate(0.2)  sepia(0.2); }
+      100% { filter: url(#worn) contrast(1.6)  brightness(0.88) saturate(0.15) sepia(0.3); }
+    }
+
+    .seller-img-small {
+      width: 110px;
+      height: 145px;
+    }
+
+    /* ── BARCODE ── */
+    .barcode-wrap {
+      width: 110px;
+      position: relative;
+    }
+
+    .barcode-svg {
+      width: 100%;
+      display: block;
+      transform: skewX(-0.8deg) scaleY(0.96);
+      transform-origin: bottom left;
+      opacity: 0.82;
+      animation: barcode-breathe 11s ease-in-out infinite;
+    }
+
+    @keyframes barcode-breathe {
+      0%,100% { opacity: 0.82; transform: skewX(-0.8deg)  scaleY(0.96); }
+      40%     { opacity: 0.72; transform: skewX(-1.2deg)  scaleY(0.93); }
+      70%     { opacity: 0.85; transform: skewX(-0.4deg)  scaleY(0.97); }
+    }
+
+    .barcode-wrap::after {
+      content: '';
+      position: absolute;
+      left: -2px; right: -2px;
+      height: 2px;
+      top: 38%;
+      background: rgba(20,10,5,0.55);
+      transform: skewX(-1deg);
+      mix-blend-mode: multiply;
+    }
+
+    /* ── TEXT ── */
+    .seller-text {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding-top: 2px;
+    }
+
+    .seller-line-name {
+      font-family: 'Vipna', monospace;
+      font-size: 52px;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      color: #111;
+      text-transform: uppercase;
+      transform: rotate(-0.6deg);
+      display: block;
+      mix-blend-mode: multiply;
+      opacity: 0.92;
+    }
+
+    .make-offer-btn {
+      font-family: 'Vipna', monospace;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      color: #111;
+      text-transform: uppercase;
+      cursor: pointer;
+      background: none;
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0,0.25);
+      padding: 0 0 3px 0;
+      text-align: left;
+      opacity: 0.65;
+      transition: opacity 0.2s, letter-spacing 0.2s;
+      mix-blend-mode: multiply;
+    }
+
+    .make-offer-btn:hover {
+      opacity: 1;
+      letter-spacing: 0.34em;
+    }
+
+    /* ── LARGE IMAGE — bottom of each column ── */
+    .seller-large-wrap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 18%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 18%);
+    }
+
+    .seller-img-large {
+      width: 100%;
+      height: 72vh;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ── OFFER OVERLAY ── */
+    #offer-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: #080808;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #offer-overlay.active { display: flex; }
+
+    #offer-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px);
+      background-size: 18px 18px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #offer-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent, transparent 27px,
+        rgba(255,255,255,0.025) 27px,
+        rgba(255,255,255,0.025) 28px
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,0,40,0.18) 20%, rgba(255,0,40,0.35) 50%, rgba(255,0,40,0.18) 80%, transparent 100%);
+      animation: scan 14s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes scan {
+      0%   { top: -2px; }
+      100% { top: 100%; }
+    }
+
+    .corner-marks {
+      position: absolute;
+      inset: 20px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .corner-marks::before,
+    .corner-marks::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-color: rgba(255,255,255,0.1);
+      border-style: solid;
+    }
+
+    .corner-marks::before { top: 0; left: 0; border-width: 1px 0 0 1px; }
+    .corner-marks::after  { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+    #offer-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      max-width: 520px;
+      padding: 0 32px;
+      gap: 0;
+    }
+
+    #offer-header {
+      font-family: 'Vipna', monospace;
+      font-size: 72px;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      opacity: 0.06;
+      transform: rotate(-1deg) translateX(-4px);
+      margin-bottom: 32px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #offer-seller-name {
+      font-family: 'Vipna', monospace;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.2);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .glyph-strip {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .glyph-strip-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .glyph-strip-symbols {
+      font-family: monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.18);
+      padding: 0 12px;
+      white-space: nowrap;
+    }
+
+    #offer-label {
+      font-family: 'Vipna', monospace;
+      font-size: 9px;
+      letter-spacing: 0.5em;
+      color: rgba(255,255,255,0.18);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    #offer-input-row {
+      display: flex;
+      align-items: baseline;
+      width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+    }
+
+    #offer-prompt {
+      font-family: monospace;
+      font-size: 13px;
+      color: rgba(255,0,40,0.55);
+      margin-right: 10px;
+    }
+
+    #offer-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'Vipna', monospace;
+      font-size: 22px;
+      letter-spacing: 0.08em;
+      color: #fff;
+      padding: 0;
+      caret-color: rgba(255,0,40,0.8);
+      line-height: 1;
+    }
+
+    #offer-input::placeholder { color: rgba(255,255,255,0.08); }
+
+    .glyph-strip.bottom { margin-top: 4px; margin-bottom: 28px; }
+
+    #offer-close-hint {
+      font-family: monospace;
+      font-size: 8px;
+      letter-spacing: 0.4em;
+      color: rgba(255,255,255,0.1);
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    #offer-close-hint:hover { color: rgba(255,255,255,0.3); }
+
+    /* ── DIALOGUE ── */
+    #dialogue {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      width: 480px;
+      max-width: 88vw;
+      margin: 70vh auto 60px;
+      padding: 0 16px;
+    }
+
+    #bottom-img-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      z-index: 6;
+    }
+
+    #bottom-img, #bottom-img-2 {
+      display: block;
+      max-width: 160px;
+    }
+
+    #bottom-img-2 {
+      mix-blend-mode: difference;
+    }
+
+    .dialogue-line {
+      font-family: 'Vipna', monospace;
+      font-weight: normal;
+      font-size: 16px;
+      letter-spacing: normal;
+      color: #e8203a;
+      line-height: 1.6;
+      background: rgba(18, 12, 14, 0.88);
+      padding: 2px 8px;
+      display: inline-block;
+    }
+
+    .dialogue-line .speaker {
+      font-weight: normal;
+      color: #ede8e1;
+      margin-right: 8px;
+      opacity: 0.9;
+      text-transform: lowercase;
+    }
+
+    .dialogue-line .direction {
+      font-style: italic;
+      color: #c0183080;
+      margin-right: 4px;
+    }
+
+    .dialogue-action {
+      font-family: 'Vipna', monospace;
+      font-weight: normal;
+      font-size: 13px;
+      letter-spacing: normal;
+      color: #d4a0a8;
+      line-height: 1.6;
+      font-style: italic;
+      margin: 4px 0;
+      background: rgba(18, 12, 14, 0.6);
+      padding: 2px 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="width:0;height:0;position:absolute;">
+    <defs>
+      <filter id="worn" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" seed="3" result="noise"/>
+        <feColorMatrix type="saturate" values="0" in="noise" result="grey-noise"/>
+        <feBlend in="SourceGraphic" in2="grey-noise" mode="multiply" result="grained"/>
+        <feTurbulence type="turbulence" baseFrequency="0.012 0.008" numOctaves="2" seed="8" result="warp"/>
+        <feDisplacementMap in="grained" in2="warp" scale="4" xChannelSelector="R" yChannelSelector="G" result="warped"/>
+        <feComposite in="warped" in2="SourceGraphic" operator="in"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <img id="bg-img" src="/images/background.png" alt="" onerror="this.style.display='none'" />
+  <div id="logo-block">
+    <span id="logo-pronunciation">/ræɡʌθɪn/ [noun, verb]</span>
+    <img id="center-logo" src="/images/ragathinkithorizontalblank.png" alt="" onerror="this.style.display='none'" />
+    <span id="logo-tagline">ragathinning kit</span>
+
+  </div>
+
+  <div id="columns">
+
+    <!-- ONE -->
+    <div class="col">
+    </div>
+
+    <!-- TWO -->
+    <div class="col">
+    </div>
+
+    <!-- THREE -->
+    <div class="col">
+    </div>
+
+  </div>
+
+  <!-- DIALOGUE -->
+  <div id="dialogue">
+    <div class="dialogue-line"><span class="speaker">SLYV</span><span class="direction">(whispering to Neue)</span> What was that word? That your friend used?</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(intrigued)</span> Which word?</div>
+    <div class="dialogue-line"><span class="speaker">SLYV</span><span class="direction">(almost intoxicated)</span> It sounded so pretty. It was drifty and so, so... --? Rag</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span>Ragathinning?</div>
+    <div class="dialogue-line"><span class="speaker">SLYV</span>Yes! <span class="direction">(she focuses)</span> What is it?</div>
+    <div class="dialogue-action">Neue's taken aback by Slyv's straightforward request. Slyv, recognizing this, introduces herself.</div>
+    <div class="dialogue-line"><span class="speaker">SLYV</span>I'm SLYV.</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span>NEUE.</div>
+    <div class="dialogue-action">They stand silently for a moment as a group of older and cleaner people walk past them. One of the group's members speaks aloud.</div>
+    <div class="dialogue-line"><span class="speaker">PASSER BY</span>They just treat themselves like nothing, they have no shame. How are you supposed to survive in a world like this...</div>
+    <div class="dialogue-action">As the group passes them, Neue pulls Slyv closer to whisper in her ear.</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(softly)</span> You really don't know? What ragathinning is?</div>
+    <div class="dialogue-action">Slyv shakes her head no. She's confused.</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span>Where have you been?</div>
+    <div class="dialogue-action">Slyv looks around at her surroundings; the people lining up and going back and repeating the light cycle. Everyone looks — all of a sudden — beat up, tired, and dirty. A different group of older people stand together talking amongst themselves (again, cleaner than the rest.)</div>
+    <div class="dialogue-line"><span class="speaker">STANDER-BY</span>There's something so lucrative about this business, it's hard to describe what it is...</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(to Slyv)</span> It's hard to get out of this place once you're in it for so long.</div>
+    <div class="dialogue-action">Slyv stares at people on the floor. Their faces, clothes, and bodies are worn in. Neue leans into Slyv.</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(whispering)</span> You see how everyone here is just what you think them to be?</div>
+    <div class="dialogue-action">Slyv remains staring at them and nods, slowly. Everyone is itching to get back in the light.</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(whispering)</span> Imagine if you could have them for yourself. And you can do with them whatever you want.</div>
+    <div class="dialogue-action">Slyv, still stares off to the distance.</div>
+    <div class="dialogue-line"><span class="speaker">SLYV</span>If I had them all for me?</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span>Then you'd be able to do with them whatever you wanted.</div>
+    <div class="dialogue-line"><span class="speaker">SLYV</span>But they're people.</div>
+    <div class="dialogue-action">Slyv turns toward Neue.</div>
+    <div class="dialogue-line"><span class="speaker">SLYV</span>They're living and they're real.</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span>They may be real people, but do you call this living?</div>
+    <div class="dialogue-action">WE SEE the human face of the young woman grow, slowly, back to being inhuman as she searches again for the digitized glass.</div>
+    <div class="dialogue-line"><span class="speaker">SLYV</span><span class="direction">(O.S.)</span> What could be better than this for them?</div>
+    <div class="dialogue-line"><span class="speaker">NEUE</span><span class="direction">(O.S.)</span> That's for someone like you to decide,</div>
+  </div>
+
+  <div id="bottom-img-wrap">
+    <img id="bottom-img" src="/images/g.png" alt="" onerror="this.style.display='none'" />
+    <img id="bottom-img-2" src="/images/g.png" alt="" onerror="this.style.display='none'" />
+  </div>
+
+  <!-- OFFER OVERLAY -->
+  <div id="offer-overlay">
+    <div class="scan-line"></div>
+    <div class="corner-marks"></div>
+    <div id="offer-inner">
+      <div id="offer-header">offer</div>
+      <div id="offer-seller-name"></div>
+      <div class="glyph-strip">
+        <div class="glyph-strip-line"></div>
+        <span class="glyph-strip-symbols">ᚠ ⊕ ᚢ ⊗ ᚦ ⊡ ᚩ ⌘ ᚱ ⊛ ᚳ ⊜ ᚷ ⊝ ᚹ ⊞ ᛁ ⊕ ᛃ ⊟ ᛇ ⊠ ᛈ ⊗ ᛉ ⊡</span>
+        <div class="glyph-strip-line"></div>
+      </div>
+      <div id="offer-label">transmit</div>
+      <div id="offer-input-row">
+        <span id="offer-prompt">▸</span>
+        <input id="offer-input" type="text" placeholder="——————————" autocomplete="off" spellcheck="false" />
+      </div>
+      <div class="glyph-strip bottom">
+        <div class="glyph-strip-line"></div>
+        <span class="glyph-strip-symbols">ᛊ ⊺ ᛋ ⊻ ᛏ ⊼ ᛒ ⊽ ᛖ ⊾ ᛗ ⊿ ᛚ ⋀ ᛜ ⋁ ᛝ ⋂ ᛞ ⋃</span>
+        <div class="glyph-strip-line"></div>
+      </div>
+      <span id="offer-close-hint" onclick="closeOffer()">esc — dismiss</span>
+    </div>
+  </div>
+
+  <script>
+    function openOffer(seller) {
+      document.getElementById('offer-seller-name').textContent = '— ' + seller + ' —';
+      document.getElementById('offer-overlay').classList.add('active');
+      setTimeout(() => document.getElementById('offer-input').focus(), 50);
+    }
+
+    function closeOffer() {
+      document.getElementById('offer-overlay').classList.remove('active');
+      document.getElementById('offer-input').value = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeOffer();
+    });
+  </script>
+
+</body>
 </html>
